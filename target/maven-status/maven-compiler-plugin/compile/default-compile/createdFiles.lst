@@ -1,0 +1,6 @@
+steps\ContributionsSteps.class
+util\AllureListener.class
+util\TestProperties.class
+steps\MainSteps.class
+pages\ContributionsPage.class
+pages\MainPage.class
