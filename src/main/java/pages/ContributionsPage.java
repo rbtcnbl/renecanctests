@@ -28,7 +28,8 @@ public class ContributionsPage extends MainPage{
     public WebElement selectBox;
 
     //выбор срока
-    @FindBy(xpath = "//li[contains(text(), '6 месяцев')]")
+    //"//li[contains(text(), '6 месяцев')]"
+    @FindBy(xpath = "//li[contains(text(), '6 месяцев') and ./ancestor::div[1][not(contains(@style,'display: none'))]]")
     public WebElement selectMonths;
 
     //капитализация
@@ -56,7 +57,7 @@ public class ContributionsPage extends MainPage{
         //rubField.click();
         fillInputMoney("amount", "300000");
         selectBox.click();
-        waitToDOwnload(dropdown);
+        waitToDOwnload(selectMonths);
         selectMonths.click();
         fillInputMoney("replenish", "50000");
         checkBox.click();
@@ -72,7 +73,7 @@ public class ContributionsPage extends MainPage{
 
 //@Step("Ставка по проценту - {0} ")
     public void checkPercent(){
-        Assert.assertEquals("7.75%", driver.findElement(By.xpath("//span[contains(@class, 'js-calc-rate')]")).getText());
+        Assert.assertEquals("6.75%", driver.findElement(By.xpath("//span[contains(@class, 'js-calc-rate')]")).getText());
     }
     public String getPercent(){
         return percentLine.getText().replaceAll("\u0025", "");
