@@ -9,6 +9,6 @@ public class FirstPageSteps {
 
     @Step("выбран пункт открытия вклада")
     public void stepGoToContributions(){
-        firstPage.contrBtn.click();
+        firstPage.selectContr();
     }
 }

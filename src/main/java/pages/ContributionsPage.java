@@ -1,19 +1,16 @@
 package pages;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import io.qameta.allure.Step;
-import org.junit.*;
+import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import steps.MainSteps;
 
 
 public class ContributionsPage extends MainPage {
-
-
+    WebDriverWait wait = new WebDriverWait(MainSteps.getDriver(), 10);
 //    @FindBy(xpath = "//span[contains(text(), 'Рубли')]")
 //    public WebElement rubField;
 
@@ -39,7 +36,29 @@ public class ContributionsPage extends MainPage {
     @FindBy(xpath = "//span[contains(@class, 'js-calc-earned')]")
     public WebElement earnedPercent;
 
+    public void enterInputSum(String name, String sum) {
+        fillInputMoney(name, sum);
+    }
 
+    public void setToRange() {
+        selectMonths.click();
+    }
+
+    public void enterReplenish(String name, String sum){
+        fillInputMoney(name,sum);
+    }
+
+
+    public void checkBox(){
+        checkBox.click();
+    }
+
+    public void checkPersent(String percent){
+        Assert.assertTrue(String.format("В поле рассчитано значение %s. Ожидалось - %s", percentLine.getText(),
+                percent),wait.until((ExpectedCondition<Boolean>) driver -> {
+            String actualResult =  percentLine.getText();
+            return actualResult.equalsIgnoreCase(percent);}));
+    }
 //    public ContributionsPage InputFrame () {
 //
 //        contrBtn.click();
@@ -59,9 +78,6 @@ public class ContributionsPage extends MainPage {
         String fullxpath = String.format(template, name);
         driver.findElement(By.xpath(fullxpath)).sendKeys(numberToFill);
     }
-
-
-
 
 
 }
