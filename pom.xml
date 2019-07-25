@@ -10,6 +10,7 @@
 
     <properties>
         <aspectj.version>1.8.10</aspectj.version>
+        <compiler.version>1.8</compiler.version>
     </properties>
     <dependencies>
         <dependency>
@@ -27,6 +28,11 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.21</version>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.4</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -43,6 +49,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20</version>
                 <configuration>
+                    <includes>
+                        <include>**/CucumberRunner.java</include>
+                    </includes>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
@@ -56,7 +65,7 @@
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>util.AllureListener</value>
+                            <value>io.qameta.allure.junit4.AllureJunit4</value>
                         </property>
                     </properties>
                 </configuration>
@@ -74,6 +83,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -1,7 +1,10 @@
 package steps;
 
+import io.qameta.allure.Attachment;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainSteps {
 
-    private static WebDriver driver;
+    public static WebDriver driver;
     private static String baseUrl;
     private static Properties properties = TestProperties.getInstance().getProperties();
     private static HashMap<String, String> variables = new HashMap<>();
@@ -46,6 +49,11 @@ public class MainSteps {
 
     @AfterClass
     public static void afterClass() throws Exception {
+        driver.close();
         driver.quit();
+    }
+    @Attachment(type = "image/png", value = "Screenshot")
+    public static byte[] takeScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }

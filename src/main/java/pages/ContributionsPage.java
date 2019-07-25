@@ -11,25 +11,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class ContributionsPage extends MainPage{
-//вклад
-    @FindBy(xpath = "//div[contains(@class, 'service__title')]//a[contains(@href, '/contributions/')]")
-    public WebElement contrBtn;
+public class ContributionsPage extends MainPage {
+
 
 //    @FindBy(xpath = "//span[contains(text(), 'Рубли')]")
 //    public WebElement rubField;
 
-//список месяцев
-    @FindBy(xpath = "//div[contains(@class, 'jq-selectbox__dropdown')]")
-    public WebElement dropdown;
-
-    //открытие списка месяцев
-    @FindBy(xpath = "//div[contains(@class, 'jq-selectbox__trigger')]")
-    public WebElement selectBox;
 
     //выбор срока
-    //"//li[contains(text(), '6 месяцев')]"
-    @FindBy(xpath = "//li[contains(text(), '6 месяцев') and ./ancestor::div[1][not(contains(@style,'display: none'))]]")
+    @FindBy(xpath = "//div[contains(@class, 'range-scale range-scale_item_6')]/div[contains(@class, 'range-scale__item range-scale__item_1')]")
     public WebElement selectMonths;
 
     //капитализация
@@ -38,7 +28,7 @@ public class ContributionsPage extends MainPage{
 
     //
     @FindBy(xpath = "//span[contains(@class, 'js-calc-rate')]")
-    public  WebElement percentLine;
+    public WebElement percentLine;
 
     @FindBy(xpath = "//span[contains(@class, 'js-calc-result')]")
     public WebElement resultSum;
@@ -50,47 +40,28 @@ public class ContributionsPage extends MainPage{
     public WebElement earnedPercent;
 
 
-    //@Step("Заполнение данных по вкладу")
-    public ContributionsPage InputFrame(){
+//    public ContributionsPage InputFrame () {
+//
+//        contrBtn.click();
+//        //rubField.click();
+//        fillInputMoney("amount", "300000");
+//        selectMonths.click();
+//        fillInputMoney("replenish", "50000");
+//        checkBox.click();
+//        new WebDriverWait(driver, 10)
+//                .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//span[contains(@class, 'js-calc-rate')]"), "6.75%"));
+//        return new ContributionsPage();
+//    }
 
-        contrBtn.click();
-        //rubField.click();
-        fillInputMoney("amount", "300000");
-        selectBox.click();
-        waitToDOwnload(selectMonths);
-        selectMonths.click();
-        fillInputMoney("replenish", "50000");
-        checkBox.click();
-        return new ContributionsPage();
-    }
 
-
-    public void fillInputMoney(String name, String numberToFill){
+    public void fillInputMoney(String name, String numberToFill) {
         String template = "//input[contains(@name, '%s')]";
         String fullxpath = String.format(template, name);
         driver.findElement(By.xpath(fullxpath)).sendKeys(numberToFill);
     }
 
-//@Step("Ставка по проценту - {0} ")
-    public void checkPercent(){
-        Assert.assertEquals("6.75%", driver.findElement(By.xpath("//span[contains(@class, 'js-calc-rate')]")).getText());
-    }
-    public String getPercent(){
-        return percentLine.getText().replaceAll("\u0025", "");
 
-    }
-//
-//    public String getResultSum(){
-//        return resultSum.getText().replaceAll("\u20BD", "");
-//    }
-//
-//    public String getReplenish(){
-//        return replenishLine.getText().replaceAll("\u20BD", "");
-//    }
-//
-//    public String getEarned(){
-//        return earnedPercent.getText().replaceAll("\u0025", "");
-//    }
+
 
 
 }

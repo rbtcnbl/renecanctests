@@ -1,6 +1,7 @@
 package pages;
 
 import org.junit.AfterClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,16 +19,17 @@ public class MainPage {
 
 
     public MainPage() {
-        //this.driver = driver;
+        this.driver = driver;
         new WebDriverWait(driver, 5, 200);
         PageFactory.initElements(driver, this);
 
     }
 
-public void waitToDOwnload(WebElement element){
+    public void waitToDOwnload(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, 5000, 200);
         wait.until(ExpectedConditions.visibilityOf(element));
         wait.until(ExpectedConditions.elementToBeClickable(element));
-}
+    }
+
 
 }
