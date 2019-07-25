@@ -10,7 +10,7 @@ import steps.MainSteps;
 public class AllureListener extends AllureJunit4 {
 
     @Override
-    public void testFailure(Failure failure) throws Exception {
+    public void testFailure(Failure failure) {
         takeScreenshot();
         super.testFailure(failure);
     }
